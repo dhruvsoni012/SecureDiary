@@ -33,28 +33,6 @@ A highly secure, beautifully designed personal diary application with military-g
 - **Card Layout** - Beautiful card-based entry display
 - **Real-time Stats** - See total entries and favorites at a glance
 
-## 📁 Project Structure
-
-```
-SecureDiary/
-├── main.py              # Application entry point with login
-├── auth.py              # Authentication & master password
-├── database.py          # Database & encryption logic
-├── utils.py             # Utility functions (formatting, etc.)
-├── ui/
-│   ├── __init__.py
-│   ├── diary_ui.py      # Main diary dashboard
-│   └── entry_ui.py      # Add/Edit/View entry windows
-├── requirements.txt     # Python dependencies
-├── README.md            # This file
-└── diary_data/          # Created automatically
-    ├── diary.db         # Encrypted entries database
-    ├── diary.key        # Encrypted diary key (CRITICAL!)
-    ├── master.key       # Master password hash
-    ├── salt.bin         # Encryption salt
-    └── device.lock      # Device ID lock
-```
-
 ## 🚀 Installation
 
 ### Prerequisites
@@ -224,40 +202,6 @@ cp -r diary_data/ ~/backups/diary_backup_$(date +%Y%m%d)/
 - Lessons learned
 - Important memories
 
-## 🔧 Customization
-
-### Change Auto-lock Duration
-Edit `ui/diary_ui.py`:
-```python
-AUTO_LOCK_TIME = 15 * 60 * 1000  # 15 minutes
-```
-
-### Add Custom Moods
-Edit `ui/entry_ui.py` in `AddEntryWindow.setup_ui()`:
-```python
-self.mood_combo.addItems([
-    "Select mood...", "😊 Happy", "Your Custom Mood"
-])
-```
-
-### Modify Color Theme
-Edit stylesheet in each UI file. Main color is `#8b7355` (brown/tan).
-
-## 📊 Database Schema
-
-```sql
-CREATE TABLE entries (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    content BLOB NOT NULL,        -- Encrypted
-    mood TEXT,
-    tags TEXT,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    is_favorite INTEGER DEFAULT 0
-);
-```
-
 ## 🐛 Troubleshooting
 
 ### "Undecryptable" Entries
@@ -278,13 +222,6 @@ CREATE TABLE entries (
 2. Ensure you're on the correct device
 3. Verify `diary_data/device.lock` exists
 4. After 5 failed attempts, app will close
-
-### App Locks Too Quickly
-
-**Solution**: Modify `AUTO_LOCK_TIME` in `ui/diary_ui.py`:
-```python
-AUTO_LOCK_TIME = 30 * 60 * 1000  # 30 minutes
-```
 
 ## 💡 Tips for Best Experience
 
